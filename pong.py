@@ -34,6 +34,8 @@ ball.shape("square")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
+ball.dx = 0.1
+ball.dy = -0.1
 
 # Function
 def paddle_a_up():
@@ -41,15 +43,18 @@ def paddle_a_up():
     y += 20
     paddle_a.sety(y)
 
+
 def paddle_a_down():
     y = paddle_a.ycor()
     y -= 20
     paddle_a.sety(y)
 
+
 def paddle_b_up():
     y = paddle_b.ycor()
     y += 20
     paddle_b.sety(y)
+
 
 def paddle_b_down():
     y = paddle_b.ycor()
@@ -67,3 +72,32 @@ wn.onkeypress(paddle_b_down, "Down")
 # Main game loop
 while True:
     wn.update()
+
+    # Move ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
+    # Border Checking
+
+    # hit top of screen
+    if ball.ycor() > 290:
+        ball.sety(290)
+        # reverse direction
+        ball.dy *= -1
+
+    # hit bottom
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        ball.dy *= -1
+
+    # hit right side
+    if ball.xcor() > 390:
+        # center ball
+        ball.goto(0, 0)
+        # reverse direction
+        ball.dx *= -1
+
+    # hit left side
+    if ball.xcor() < -390:
+        ball.goto(0, 0)
+        ball.dx *= -1
