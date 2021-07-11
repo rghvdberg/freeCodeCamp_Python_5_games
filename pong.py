@@ -9,6 +9,10 @@ wn.bgcolor("black")
 wn.setup(width=800, height=600)
 wn.tracer(0)
 
+canvas = wn.getcanvas()
+root = canvas.winfo_toplevel()
+running = True
+
 # Score
 score_a = 0
 score_b = 0
@@ -52,7 +56,9 @@ pen.goto(0, 260)
 pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "normal"))
 
 # Function
-
+def on_close():
+    global running
+    running = False
 
 def paddle_a_up():
     y = paddle_a.ycor()
@@ -86,7 +92,10 @@ wn.onkeypress(paddle_b_up, "Up")
 wn.onkeypress(paddle_b_down, "Down")
 
 # Main game loop
-while True:
+
+root.protocol("WM_DELETE_WINDOW", on_close)
+
+while running:
     wn.update()
 
     # Move ball
