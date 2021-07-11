@@ -6,7 +6,7 @@ freeCodeCamp.org
 
 Games:
 
-- [ ] Pong
+- [x] Pong
 - [ ] Snake
 - [ ] Connect Four
 - [ ] Tetris
