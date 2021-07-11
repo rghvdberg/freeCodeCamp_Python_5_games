@@ -21,8 +21,15 @@ class cube(object):
 
 
 class snake(object):
+    body = []
+    tunres = {}
     def __init__(self, color, pos):
-        pass
+        self.color = color
+        self.head = cube(pos)
+        self.body.append(self.head)
+        self.dirnx = 0
+        self.dirny = 1
+
 
     def move(self):
         pass
