@@ -1,15 +1,16 @@
 # Snake Tutorial Python
 import math
 import random
-from turtle import pos
 import pygame
 import tkinter as tk
 from tkinter import messagebox
 
-class cube(ojectt):
-    rows= 0
+
+class cube(object):
+    rows = 0
     w = 0
-    def __init__(self,start,dirnx=1,dirny=0,color=(255,0,0)):
+
+    def __init__(self, start, dirnx=1, dirny=0, color=(255, 0, 0)):
         pass
 
     def move(self, dirnx, dirny):
@@ -28,32 +29,51 @@ class snake(object):
 
     def reset(self, pos):
         pass
-    
-    def draw(self,surface):
+
+    def draw(self, surface):
         pass
 
-def drawGrid(w, rows, surface):
-    pass
+
+def drawGrid(width, rows, surface):
+    sizeBtwn = width // rows
+    x = 0
+    y = 0
+
+    for l in range(rows):
+        x = x + sizeBtwn
+        y = y + sizeBtwn
+        pygame.draw.line(surface, (255, 255, 255), (x, 0), (x, width))
+        pygame.draw.line(surface, (255, 255, 255), (0, y), (width, y))
+
 
 def redrawWindow(surface):
-    pass
+    global rows, width
+    surface.fill((0, 0, 0))
+    drawGrid(width, rows, surface)
+    pygame.display.update()
+
 
 def randomSnack(rows, items):
     pass
 
+
 def message_box(subject, content):
     pass
 
+
 def main():
-    pass
+    global width, rows
+    width = 500
+    rows = 20
+    win = pygame.display.set_mode((width, width))
+    s = snake((255, 0, 0), (10, 10))
+    flag = True
+    clock = pygame.time.Clock()
 
-rows = 
-w = 
-h = 
+    while flag:
+        pygame.time.delay(50)
+        clock.tick(10)
+        redrawWindow(win)
 
-cube.rows = rows
-cube.w = w
 
 main()
-
-
