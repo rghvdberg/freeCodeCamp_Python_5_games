@@ -7,7 +7,7 @@ freeCodeCamp.org
 Games:
 
 - [x] Pong
-- [ ] Snake
+- [x] Snake
 - [ ] Connect Four
 - [ ] Tetris
 - [ ] Online Multiplayer Game
