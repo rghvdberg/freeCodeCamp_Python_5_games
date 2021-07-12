@@ -1,6 +1,5 @@
 # connect4.py
 import numpy as np
-from numpy.lib.function_base import bartlett
 
 ROW_COUNT = 6
 COLUMN_COUNT = 7
