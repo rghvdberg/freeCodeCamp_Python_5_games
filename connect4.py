@@ -1,8 +1,13 @@
 # connect4.py
 import numpy as np
+import pygame
+import sys
+from pygame import draw
 
 ROW_COUNT = 6
 COLUMN_COUNT = 7
+BLUE = (0,0,205)
+BACK = (43,45,50)
 
 
 def create_board():
@@ -61,7 +66,6 @@ def winning_move(board, piece):
             ):
                 return True
 
-
     # check positive sloped diagonal
     for c in range(COLUMN_COUNT - 3):
         for r in range(3, ROW_COUNT):
@@ -74,35 +78,71 @@ def winning_move(board, piece):
                 return True
 
 
+def draw_board(board):
+    for c in range(COLUMN_COUNT):
+        for r in range(ROW_COUNT):
+            x = c * SQUARE_SIZE
+            y = r * SQUARE_SIZE + SQUARE_SIZE
+            pygame.draw.rect(screen, BLUE, (x, y, SQUARE_SIZE, SQUARE_SIZE))
+            pygame.draw.circle(
+                screen,
+                BACK,
+                (x + SQUARE_SIZE / 2, y + SQUARE_SIZE / 2),
+                (SQUARE_SIZE / 2) * 0.90,
+            )
+
+
 board = create_board()
 print_board(board)
 game_over = False
 turn = 0
 
+pygame.init()
+
+SQUARE_SIZE = 100
+
+width = COLUMN_COUNT * SQUARE_SIZE
+height = (ROW_COUNT + 1) * SQUARE_SIZE
+
+size = (width, height)
+
+screen = pygame.display.set_mode(size)
+
 while not game_over:
-    # Ask for Player 1 Input
-    if turn == 0:
-        col = int(input("Player 1 Make your Selection (0-6:)"))
-        if is_valid_location(board, col):
-            row = get_next_open_row(board, col)
-            drop_piece(board, row, col, 1)
 
-        if winning_move(board, 1):
-            print("Player 1 Wins! Congrats!")
-            game_over = True
+    for event in pygame.event.get():
+        screen.fill(BACK)
+        draw_board(board)
+        screen
+        if event.type == pygame.QUIT:
+            sys.exit()
 
-    # Ask for Player 2 Input
-    else:
-        col = int(input("Player 2 Make your Selection (0-6:)"))
-        if is_valid_location(board, col):
-            row = get_next_open_row(board, col)
-            drop_piece(board, row, col, 2)
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            continue
+        #     # Ask for Player 1 Input
+        #     if turn == 0:
+        #             col = int(input("Player 1 Make your Selection (0-6:)"))
+        #             if is_valid_location(board, col):
+        #                 row = get_next_open_row(board, col)
+        #                 drop_piece(board, row, col, 1)
 
-        if winning_move(board, 2):
-            print("Player 2 Wins! Congrats!")
-            game_over = True
+        #     if winning_move(board, 1):
+        #         print("Player 1 Wins! Congrats!")
+        #         game_over = True
 
-    print_board(board)
+        #     # Ask for Player 2 Input
+        #     else:
+        #         col = int(input("Player 2 Make your Selection (0-6:)"))
+        #         if is_valid_location(board, col):
+        #             row = get_next_open_row(board, col)
+        #             drop_piece(board, row, col, 2)
 
-    turn += 1
-    turn = turn % 2
+        #         if winning_move(board, 2):
+        #             print("Player 2 Wins! Congrats!")
+        #             game_over = True
+
+        # print_board(board)
+
+        # turn += 1
+        # turn = turn % 2
+        pygame.display.flip()
